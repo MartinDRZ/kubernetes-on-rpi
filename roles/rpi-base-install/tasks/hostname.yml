@@ -1,0 +1,6 @@
+---
+#Set hostname as per the inventory hosts file
+
+- name: SET HOSTNAME
+  hostname:
+    name: "{{ inventory_hostname }}"
