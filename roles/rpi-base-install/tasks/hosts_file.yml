@@ -1,0 +1,10 @@
+---
+
+# Set up /etc/hosts with the hosts from the inventory.
+
+- name: update hosts file
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ hostvars[item].ansible_host }} {{ item }}"
+    regexp: '.*{{ item }}$'
+  with_items: "{{ groups.all }}"

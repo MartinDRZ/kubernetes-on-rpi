@@ -1,0 +1,4 @@
+ansible_user: pirate
+ansible_password: hypriot
+become: yes
+become_method: su
