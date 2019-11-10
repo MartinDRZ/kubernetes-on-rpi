@@ -1,0 +1,20 @@
+- name: Ensure Kubernetes GPG key is present
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add Kubernetes repository to apt
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: 'kubernetes'
+
+- name: Install kubelet
+  apt:
+    name: kubelet
+    state: present
+
+- name: Install kubeadm
+  apt:
+    name: kubeadm
+    state: present

@@ -13,3 +13,8 @@
      - rpi-kube-master
 
 # Worker node only plays
+
+ - hosts: kube-nodes
+   roles:
+     - rpi-kube-nodes
+
