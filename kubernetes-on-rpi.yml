@@ -16,5 +16,5 @@
 
  - hosts: kube-nodes
    roles:
-     - rpi-kube-nodes
+     - rpi-kube-node
 

@@ -1,2 +1,4 @@
 ---
 # vars file for rpi-kube-node
+
+join_command: "{{ hostvars['kubepi-01'].join_command }}"

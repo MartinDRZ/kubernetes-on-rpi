@@ -5,3 +5,32 @@
      name: kubectl
      state: present
      force: yes
+
+- name: Pre-pull Kubernetes images
+  command: kubeadm config images pull
+
+- name: Init Kubernetes cluster using kubeadm
+  command: kubeadm init --pod-network-cidr=10.224.0.0/16
+  args:
+    creates: /etc/kubernetes/admin.conf
+
+- name: Create .kube dir
+  command: mkdir -p $HOME/.kube
+  args:
+    creates: $HOME/.kube
+
+- name: Copies Kubernetes config to $HOME/.kube
+  command: cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  args:
+    creates: $HOME/.kube/config
+
+- name: Set correct permissions
+  file:
+    path: $HOME/.kube/config
+    owner: pirate
+    group: pirate
+
+- name: install Flannel
+  command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  args:
+    creates: /run/flannel

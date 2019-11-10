@@ -4,6 +4,9 @@
    command: kubeadm token create --print-join-command
    register: join_token
 
-- name: Create node join command fact
-  set_fact:
-    join_command: "{{ join_token.stdout_lines[0] }}"
+ - name: Create node join command fact
+   set_fact:
+     join_command: "{{ join_token.stdout_lines[0] }}"
+
+ - debug:
+     msg: Raw join token is {{ join_token }} - Join Command is {{ join_command }}
