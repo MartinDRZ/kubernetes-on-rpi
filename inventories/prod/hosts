@@ -10,12 +10,10 @@ all:
       ansible_host: 192.168.1.146
   children:
     kube-masters:
-      children:
-        hosts:
-          kubepi-01:
+      hosts:
+        kubepi-01:
     kube-nodes:
-      children:
-        hosts:
-          kubepi-02:
-          kubepi-03:
-          kubepi-04:
+      hosts:
+        kubepi-02:
+        kubepi-03:
+        kubepi-04:

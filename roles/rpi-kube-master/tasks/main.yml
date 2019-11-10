@@ -1,0 +1,4 @@
+---
+# tasks file for rpi-kube-master
+
+    - import_tasks: install_kube_master.yml

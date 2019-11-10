@@ -8,4 +8,8 @@
 
 # Master node only plays
 
+ - hosts: kube-masters
+   roles:
+     - rpi-kube-master
+
 # Worker node only plays
