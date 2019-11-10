@@ -1,0 +1,60 @@
+---
+#Install packages we need before we do anything else...
+
+- name: Update apt-cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install PolicyKit-1
+  apt:
+     name: policykit-1
+     state: present
+
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Install Docker #(already there in HypriotOS, but lets get the latest and greatest)
+  apt:
+    name: docker-ce
+    state: present
+    install_recommends: no
+
+- name: Remove aufs-dkms #(in case it gets installed accidentally, it does not work on RPi)
+  apt:
+    name: aufs-dkms
+    state: absent
+
+- name: Install NFS
+  apt:
+    name: nfs-common
+    state: present
+
+- name: Ensure Kubernetes GPG key is present
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add Kubernetes repository to apt
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: 'kubernetes'
+
+- name: Install kubelet
+  apt:
+    name: kubelet
+    state: present
+
+- name: Install kubeadm
+  apt:
+    name: kubeadm
+    state: present
+
+### CLEAN UP DEPS ###
+
+- name: Remove unused dependencies
+  apt:
+    autoremove: yes

@@ -1,0 +1,3 @@
+ansible_user: pirate
+ansible_password: hypriot
+ansible_become: yes

@@ -1,0 +1,5 @@
+---
+# tasks file for rpi-kube-node
+
+ - import_tasks: install_packages.yml
+ - import_tasks: join_cluster.yml

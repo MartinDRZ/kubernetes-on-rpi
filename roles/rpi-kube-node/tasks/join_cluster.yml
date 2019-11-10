@@ -1,0 +1,8 @@
+---
+
+ - name: Join node to cluster using join command
+   command: "{{ join_command }}"
+   register: join_output
+
+ - debug:
+     msg: "{{ join_output }}"

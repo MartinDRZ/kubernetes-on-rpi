@@ -1,18 +1,19 @@
 all:
   hosts:
-    localhost:
-      ansible_host=127.0.0.1
     kubepi-01:
-      ansible_host=192.168.1.143
+      ansible_host: 192.168.1.143
     kubepi-02:
-      ansible_host=192.168.1.144
+      ansible_host: 192.168.1.144
     kubepi-03:
-      ansible_host=192.168.1.145
+      ansible_host: 192.168.1.145
+    kubepi-04:
+      ansible_host: 192.168.1.146
   children:
     kube-masters:
       hosts:
-        kubepi-01
+        kubepi-01:
     kube-nodes:
       hosts:
-        kubepi-02
-        kubepi-03
+        kubepi-02:
+        kubepi-03:
+        kubepi-04:

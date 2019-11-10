@@ -1,0 +1,6 @@
+---
+# tasks file for rpi-kube-master
+
+    - import_tasks: install_kube_master.yml
+    - import_tasks: install_packages.yml
+    - import_tasks: get_join_token.yml

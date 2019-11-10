@@ -1,0 +1,20 @@
+---
+
+#Run plays relevant to all RPi hosts in the cluster
+
+ - hosts: all
+   roles:
+     - rpi-base-install
+
+# Master node only plays
+
+ - hosts: kube-masters
+   roles:
+     - rpi-kube-master
+
+# Worker node only plays
+
+ - hosts: kube-nodes
+   roles:
+     - rpi-kube-node
+

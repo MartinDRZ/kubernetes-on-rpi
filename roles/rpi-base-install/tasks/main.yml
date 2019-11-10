@@ -3,3 +3,7 @@
 
 # Builds the basic dependencies for the cluster
 
+#  tasks:
+    - import_tasks: install_packages.yml
+    - import_tasks: hostname.yml
+    - import_tasks: hosts_file.yml
