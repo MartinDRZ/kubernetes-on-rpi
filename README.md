@@ -2,7 +2,7 @@
 Kubernetes on Raspberry Pi
 
 
-A simple setup guide for installing an N-host Kubernetes cluster on Raspberry Pi. For my cluster, I am using 1x Raspberry Pi 4 (4Gb) as Master and 2x Raspberry Pi 4 (1Gb) & 2x Raspberry Pi 3 B+ as nodes.
+A simple setup guide for installing an N-host Kubernetes cluster on Raspberry Pi. For my cluster, I am using 1x Raspberry Pi 4 (4Gb) as Master and 2x Raspberry Pi 4 (1Gb) & 2x Raspberry Pi 3 B+ as nodes. I have NFS exports on my Synology NAS for shared storage, but this isn't essential - you can use the local SD card storage of your Pi if you want to.
 
 All configurations are carried out in Ansible except for the initial setup which is done using cloud-init as part of the HypriotOS base install.
 
@@ -30,3 +30,15 @@ Now that we have a working OS installed on the Raspberry Pis, it is time to swit
 
 There are many ways to do things in Ansible but I find breaking things down into distinct roles to be the best approach. I have created a role called rpi-base-install which will do all of the basic tasks common to all of my rpis regardless of if they are running as part of my Kubernetes cluster or not. This way, I can pick up the role and re-use it later on without having to change too much.
 
+The base installations carried out by rpi-base-install are straightforward. The tasks make sure the apt cache is up to date, installs the correct version of Docker and fixes some little issues I had with HypriotOS's baked-in Docker install. I also install NFS which will allow me some flexibility with my storage choices later on.
+
+I also have chosen to use Ansible to automate the naming of the hosts and the setup of /etc/hosts on each of the Pis.
+
+
+Section 3 - Install Kubernetes
+
+This is broken out into two parts - one role for the Kubernetes Master and another for the regular Nodes.
+
+How Kubernetes works is beyond the scope of this, but basically these roles install the components required to get Kubernetes up and running, installs Flannel as the CNI (networking plugin) and then joins the worker nodes to the cluster.
+
+Once you've got this far you need to decide for yourself how you'd like to continue - you'll need to set up an Ingress Controller (eg Traefik) and get some persistent storage working.
